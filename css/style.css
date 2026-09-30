@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #2c3e50;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+.section-heading {
+    font-weight: 700;
+    color: #1a252f;
+}
+
+.custom-card-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.custom-card {
+    flex: 1 1 calc(33.333% - 0.667rem);
+    min-width: 0;
+}
+
+@media (max-width: 991.98px) {
+    .custom-card {
+        flex-basis: calc(50% - 0.5rem);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .custom-card {
+        flex-basis: 100%;
+    }
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+p {
+    font-size: 0.95rem;
+}
+
+@media (min-width: 576px) {
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    h1 {
+        font-size: 2.75rem;
+    }
+
+    p {
+        font-size: 1.05rem;
+    }
+}
+
+.hero-image {
+    max-height: 430px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-fixed-image {
+    height: 210px;
+    object-fit: cover;
+}
+
+.team-image {
+    height: 300px;
+    object-fit: cover;
+}
+
+.guide-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.guide-round {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.hot-offer {
+    min-height: 430px;
+    background: url('../images/Charyn.jpg') center / cover no-repeat;
+}
+
+.hot-offer-overlay {
+    min-height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.glass-card {
+    width: min(100%, 500px);
+    background: rgba(20, 30, 40, 0.68);
+    backdrop-filter: blur(8px);
+}
+
+.tour-card {
+    min-height: 340px;
+    background-size: cover;
+    background-position: center;
+}
+
+.tour-card-content {
+    min-height: 340px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.82));
+}
+
+.tour-overlay {
+    background: rgba(0,0,0,0.2);
+}
+
+.carousel-image {
+    height: 430px;
+    object-fit: cover;
+}
+
+@media (max-width: 575.98px) {
+    .carousel-image {
+        height: 260px;
+    }
+
+    .tour-card,
+    .tour-card-content {
+        min-height: 300px;
+    }
+}
+
+.tour-bg-1 { background-image: url('../images/medeu.jpg'); }
+.tour-bg-2 { background-image: url('../images/Almaty-mountains.jpg'); }
+.tour-bg-3 { background-image: url('../images/Charyn.jpg'); }
+.tour-bg-4 { background-image: url('../images/Big_Almaty_lake.jpg'); }
+.tour-bg-5 { background-image: url('../images/kolsai.jpg'); }
+.tour-bg-6 { background-image: url('../images/altyn-emel.jpg'); }
