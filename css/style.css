@@ -135,13 +135,15 @@ p {
 }
 
 .carousel-image {
-    height: 430px;
+    height: 450px;
     object-fit: cover;
+    object-position: center;
+    width: 100%;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 768px) {
     .carousel-image {
-        height: 260px;
+        height: 250px;
     }
 
     .tour-card,
