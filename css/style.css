@@ -158,3 +158,114 @@ p {
 .tour-bg-4 { background-image: url('../images/Big_Almaty_lake.jpg'); }
 .tour-bg-5 { background-image: url('../images/kolsai.jpg'); }
 .tour-bg-6 { background-image: url('../images/altyn-emel.jpg'); }
+
+body {
+    transition: background-color 0.5s ease;
+}
+
+.datetime-block {
+    border-left: 5px solid #0d6efd;
+}
+
+.faq-item {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #fff;
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font-weight: 600;
+    color: #1a252f;
+}
+
+.faq-question:hover,
+.faq-question[aria-expanded="true"] {
+    background: #f1f6ff;
+}
+
+.faq-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.faq-question[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.35s ease, visibility 0s linear 0.35s;
+}
+
+.faq-answer.open {
+    visibility: visible;
+    transition: max-height 0.35s ease, visibility 0s;
+}
+
+.faq-answer-inner {
+    padding: 0 1.25rem 1rem;
+}
+
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease, visibility 0s;
+}
+
+.popup-window {
+    position: relative;
+    width: min(100%, 440px);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem 1.5rem 1.5rem;
+    background: #fff;
+    border-radius: 1rem;
+    transform: translateY(-20px);
+    transition: transform 0.25s ease;
+}
+
+.popup-overlay.show .popup-window {
+    transform: translateY(0);
+}
+
+.popup-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    border: 0;
+    background: transparent;
+    font-size: 2rem;
+    line-height: 1;
+    color: #6c757d;
+}
+
+.popup-close:hover {
+    color: #000;
+}
