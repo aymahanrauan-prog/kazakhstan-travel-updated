@@ -22,13 +22,13 @@
     function buildGreeting(partOfDay) {
         switch (partOfDay) {
             case 'morning':
-                return 'Қайырлы таң! Good morning, traveler';
+                return 'Good morning, traveler';
             case 'afternoon':
-                return 'Қайырлы күн! Good afternoon, traveler';
+                return 'Good afternoon, traveler';
             case 'evening':
-                return 'Қайырлы кеш! Good evening, traveler';
+                return 'Good evening, traveler';
             default:
-                return 'Қайырлы түн! Good night, traveler';
+                return 'Good night, traveler';
         }
     }
 
