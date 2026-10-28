@@ -106,6 +106,9 @@
         });
     }
 
+    // Used by multistep.js to validate one step at a time
+    window.KZValidation = { validateField: validateField };
+
     setupForm(document.getElementById('register-form'), 'register-success');
     setupForm(document.getElementById('contact-form'), 'contact-success');
 })();
