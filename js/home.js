@@ -22,13 +22,13 @@
     function buildGreeting(partOfDay) {
         switch (partOfDay) {
             case 'morning':
-                return 'Good morning, traveler';
+                return 'Қайырлы таң! Good morning, traveler';
             case 'afternoon':
-                return 'Good afternoon, traveler';
+                return 'Қайырлы күн! Good afternoon, traveler';
             case 'evening':
-                return 'Good evening, traveler';
+                return 'Қайырлы кеш! Good evening, traveler';
             default:
-                return 'Good night, traveler';
+                return 'Қайырлы түн! Good night, traveler';
         }
     }
 
@@ -75,4 +75,34 @@
     if (factButton && factText) {
         factButton.addEventListener('click', showRandomFact);
     }
+
+    /* ---------- 3. Live Search / Filter ---------- */
+
+    const searchInput = document.getElementById('search-input');
+
+    if (searchInput) {
+        $('#search-input').on('keyup', function () {
+            var searchText = $(this).val().toLowerCase();
+
+            $('.card, article').each(function () {
+                var $item = $(this);
+                var itemText = $item.text().toLowerCase();
+
+                if (itemText.indexOf(searchText) !== -1) {
+                    $item.show();
+                } else {
+                    $item.hide();
+                }
+            });
+        });
+    }
+
+    /* ---------- 4. Scroll Progress Bar ---------- */
+    
+    $(window).on('scroll', function () {
+        var winScroll = $(this).scrollTop();
+        var height = $(document).height() - $(window).height();
+        var scrolled = (winScroll / height) * 100;
+        $('#scroll-progress').css('width', scrolled + '%');
+    });
 })();
