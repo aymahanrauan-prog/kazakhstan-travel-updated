@@ -152,12 +152,6 @@ p {
     }
 }
 
-.tour-bg-1 { background-image: url('../images/medeu.jpg'); }
-.tour-bg-2 { background-image: url('../images/Almaty-mountains.jpg'); }
-.tour-bg-3 { background-image: url('../images/Charyn.jpg'); }
-.tour-bg-4 { background-image: url('../images/Big_Almaty_lake.jpg'); }
-.tour-bg-5 { background-image: url('../images/kolsai.jpg'); }
-.tour-bg-6 { background-image: url('../images/altyn-emel.jpg'); }
 
 body {
     transition: background-color 0.5s ease;
@@ -268,4 +262,149 @@ body {
 
 .popup-close:hover {
     color: #000;
+}
+
+/* =========================================================
+   Assignment 5 - interactive features
+   ========================================================= */
+
+/* ---------- Animations (triggered from JavaScript) ---------- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes starPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.6) rotate(-12deg); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in-up { animation: fadeInUp 0.5s ease both; }
+.star-pop   { animation: starPop 0.4s ease; }
+.slide-in   { animation: slideIn 0.35s ease both; }
+
+/* ---------- Greeting and fun fact (home page) ---------- */
+.greeting { letter-spacing: 0.02em; }
+
+.fact-block { border-left: 5px solid #dc3545; }
+
+/* ---------- Tour cards: hover lift and star rating ---------- */
+.tour-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tour-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+}
+
+.rating-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.rating-stars { display: inline-flex; gap: 0.1rem; }
+
+.star {
+    padding: 0 0.1rem;
+    border: 0;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.star:hover { color: #ffe08a; transform: scale(1.2); }
+.star.selected { color: #ffc107; }
+.star:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---------- Culture page: extra info ---------- */
+.more-info {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid #0d6efd;
+    background: rgba(13, 110, 253, 0.07);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* ---------- Multi-step registration form ---------- */
+.progress-bar { transition: width 0.35s ease; }
+
+.summary-list {
+    background: #f1f6ff;
+}
+
+.summary-list dt { font-size: 0.8rem; text-transform: uppercase; color: #6c757d; }
+.summary-list dd { font-weight: 600; margin-bottom: 0.75rem; word-break: break-word; }
+
+/* ---------- Keyboard focus in the navbar ---------- */
+.navbar .nav-link:focus-visible,
+.navbar .btn:focus-visible {
+    outline: 2px solid #ffc107;
+    outline-offset: 2px;
+}
+
+/* ---------- Smooth colour change when the theme switches ---------- */
+.bg-white, .card, .faq-item, .faq-question, .popup-window, .more-info, .summary-list {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* =========================================================
+   Night theme  (<html data-bs-theme="dark">)
+   Bootstrap handles forms, cards and buttons; these rules
+   cover our own colours and the .bg-white / .bg-light helpers.
+   ========================================================= */
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] body.bg-light {
+    background-color: #11171d !important;
+    color: #e2e8f0;
+}
+
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .bg-light {
+    background-color: #1b242d !important;
+}
+
+[data-bs-theme="dark"] .section-heading,
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5 {
+    color: #f1f5f9;
+}
+
+[data-bs-theme="dark"] .text-secondary { color: #a9b6c3 !important; }
+[data-bs-theme="dark"] .text-primary   { color: #6ea8fe !important; }
+
+[data-bs-theme="dark"] .card { background-color: #1b242d; }
+
+[data-bs-theme="dark"] .faq-item { background: #1b242d; border-color: #2e3a46; }
+[data-bs-theme="dark"] .faq-question { color: #f1f5f9; }
+[data-bs-theme="dark"] .faq-question:hover,
+[data-bs-theme="dark"] .faq-question[aria-expanded="true"] { background: #243240; }
+
+[data-bs-theme="dark"] .popup-window { background: #1b242d; }
+[data-bs-theme="dark"] .popup-close { color: #a9b6c3; }
+[data-bs-theme="dark"] .popup-close:hover { color: #fff; }
+
+[data-bs-theme="dark"] .more-info { background: rgba(110, 168, 254, 0.1); border-left-color: #6ea8fe; }
+[data-bs-theme="dark"] .summary-list { background: #243240; }
+[data-bs-theme="dark"] .summary-list dt { color: #a9b6c3; }
+
+/* ---------- Respect the "reduce motion" system setting ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-up, .star-pop, .slide-in { animation: none; }
+    .tour-card, .star, .progress-bar { transition: none; }
 }

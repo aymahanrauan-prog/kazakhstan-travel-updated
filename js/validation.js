@@ -67,7 +67,7 @@
         return true;
     }
 
-    function setupForm(form, successId) {
+    function setupForm(form, successId, toastId) {
         if (!form) { return; }
         var fields = Array.prototype.filter.call(form.elements, function (el) { return rules[el.id]; });
         var success = document.getElementById(successId);
@@ -84,6 +84,7 @@
             });
         });
 
+        // Обработка отправки формы со спиннером и тостом
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             if (success) { success.classList.add('d-none'); }
@@ -95,17 +96,67 @@
 
             if (firstInvalid) { firstInvalid.focus(); return; }
 
-            form.reset();
-            fields.forEach(function (el) { el.classList.remove('is-valid', 'is-invalid'); });
-            if (success) { success.classList.remove('d-none'); }
-        });
+            // Находим кнопку отправки и элементы спиннера внутри нее
+            var $submitBtn = $(form).find('button[type="submit"], #submit-btn');
+            var $spinner = $submitBtn.find('.spinner-border');
+            var $btnText = $submitBtn.find('.btn-text');
+            var originalText = $btnText.length ? $btnText.text() : 'Sign Up';
 
-        form.addEventListener('reset', function () {
-            fields.forEach(function (el) { el.classList.remove('is-valid', 'is-invalid'); });
-            if (success) { success.classList.add('d-none'); }
+            // Блокируем кнопку, показываем спиннер и текст загрузки
+            $submitBtn.prop('disabled', true);
+            if ($spinner.length) { $spinner.removeClass('d-none'); }
+            if ($btnText.length) { $btnText.text('Please wait...'); } else { $submitBtn.text('Please wait...'); }
+
+            setTimeout(function () {
+                // Возвращаем кнопку в исходное состояние
+                $submitBtn.prop('disabled', false);
+                if ($spinner.length) { $spinner.addClass('d-none'); }
+                if ($btnText.length) { $btnText.text(originalText); } else { $submitBtn.text(originalText); }
+
+                // Очищаем форму и валидацию
+                form.reset();
+                fields.forEach(function (el) { el.classList.remove('is-valid', 'is-invalid'); });
+                if (success) { success.classList.remove('d-none'); }
+
+                // Воспроизводим звук успешной отправки
+                if (window.KZSound && typeof window.KZSound.play === 'function') {
+                    window.KZSound.play('success');
+                }
+
+                // Показываем нужный тост в правом нижнем углу
+                if (toastId) {
+                    var toastEl = document.getElementById(toastId);
+                    if (toastEl) {
+                        var toast = new bootstrap.Toast(toastEl);
+                        toast.show();
+                    }
+                }
+            }, 1500);
         });
     }
 
-    setupForm(document.getElementById('register-form'), 'register-success');
-    setupForm(document.getElementById('contact-form'), 'contact-success');
+    // Used by multistep.js to validate one step at a time
+    window.KZValidation = { validateField: validateField };
+
+    // Инициализируем формы с передачей ID соответствующего тоста для угла
+    setupForm(document.getElementById('register-form'), 'register-success', 'register-toast');
+    setupForm(document.getElementById('contact-form'), 'contact-success', 'live-toast');
+
+    // Task 8: Copy to Clipboard functionality
+    $('#copy-email-btn').on('click', function () {
+        var textToCopy = $('#contact-email-text').text();
+        var $btn = $(this);
+
+        navigator.clipboard.writeText(textToCopy).then(function () {
+            $btn.html('✓ Copied!');
+            $btn.removeClass('btn-outline-secondary').addClass('btn-success');
+
+            setTimeout(function () {
+                $btn.html('Copy');
+                $btn.removeClass('btn-success').addClass('btn btn-sm btn-primary');
+            }, 2000);
+        }).catch(function (err) {
+            console.error('Failed to copy text: ', err);
+        });
+    });
 })();
