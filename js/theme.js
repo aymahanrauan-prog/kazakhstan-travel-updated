@@ -10,6 +10,7 @@
 
     const STORAGE_KEY = 'kz-travel-theme';
     const root = document.documentElement;
+    root.classList.add('js');   // lets CSS know JavaScript is running (used by the scroll-reveal effect)
 
     function getSavedTheme() {
         try { return localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light'; }
@@ -23,7 +24,10 @@
         const button = document.getElementById('theme-toggle');
         if (!button) { return; }
         // The label shows the mode the button will switch TO
-        button.textContent = currentTheme === 'dark' ? 'Day mode' : 'Night mode';
+        button.innerHTML = currentTheme === 'dark'
+            ? '<i class="bi bi-sun" aria-hidden="true"></i> Day'
+            : '<i class="bi bi-moon-stars" aria-hidden="true"></i> Night';
+        button.setAttribute('aria-label', currentTheme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
         button.setAttribute('aria-pressed', String(currentTheme === 'dark'));
     }
 
@@ -32,7 +36,7 @@
         root.setAttribute('data-bs-theme', theme);
         try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) { /* ignore */ }
         updateButton();
-        // Let other scripts (background.js) react to the change
+        // Let other scripts react to the change
         document.dispatchEvent(new CustomEvent('kz:themechange', { detail: { theme: theme } }));
     }
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your Kazakhstan Travel profile, saved tours and requests">
+    <title>My profile | Kazakhstan Travel</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <a class="brand" href="index.html"><i class="bi bi-compass" aria-hidden="true"></i> Kazakhstan <span>Travel</span></a>
+                <div class="header-actions">
+                    <button type="button" id="theme-toggle" class="btn-outline-brand" aria-pressed="false">Night</button>
+                    <div id="auth-area">
+                        <a href="login.html" class="auth-link">Log in</a>
+                        <a href="register.html" class="btn-brand">Sign up</a>
+                    </div>
+                    <button type="button" class="menu-toggle d-lg-none" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">&#9776;</button>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg p-0" aria-label="Main navigation">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav main-menu">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="destinations.html">Destinations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tours.html">Tours</a></li>
+                    <li class="nav-item"><a class="nav-link" href="culture.html">Culture</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="container py-5">
+            <h1 class="visually-hidden">My profile</h1>
+            <div class="row g-4">
+                <aside class="col-12 col-lg-4">
+                    <section class="panel text-center" aria-label="Account summary">
+                        <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
+                        <h2 class="h4 mb-1" id="profile-name"></h2>
+                        <p class="text-muted" id="profile-email"></p>
+                        <button type="button" id="profile-logout" class="btn btn-outline-primary w-100">Log out</button>
+                    </section>
+                </aside>
+                <div class="col-12 col-lg-8">
+                    <section class="panel mb-4" aria-labelledby="details-title">
+                        <h2 id="details-title" class="h4 mb-3">Account details</h2>
+                        <dl class="mb-0">
+                            <div class="detail-row"><dt>Full name</dt><dd id="detail-name"></dd></div>
+                            <div class="detail-row"><dt>Email</dt><dd id="detail-email"></dd></div>
+                            <div class="detail-row"><dt>Phone</dt><dd id="detail-phone"></dd></div>
+                            <div class="detail-row"><dt>Member since</dt><dd id="detail-since"></dd></div>
+                        </dl>
+                    </section>
+                    <section class="panel mb-4" aria-labelledby="saved-tours-title">
+                        <h2 id="saved-tours-title" class="h4 mb-3">Saved tours</h2>
+                        <div id="saved-tours"></div>
+                    </section>
+                    <section class="panel mb-4" aria-labelledby="saved-places-title">
+                        <h2 id="saved-places-title" class="h4 mb-3">Saved places</h2>
+                        <div id="saved-places"></div>
+                    </section>
+                    <section class="panel" aria-labelledby="requests-title">
+                        <h2 id="requests-title" class="h4 mb-3">My requests</h2>
+                        <div id="my-requests"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-lg-4">
+                    <a class="brand" href="index.html"><i class="bi bi-compass" aria-hidden="true"></i> Kazakhstan <span>Travel</span></a>
+                    <p class="text-muted mt-3 mb-0">Guided tours, cultural experiences and travel ideas across Kazakhstan: from the canyons of Charyn to the skyline of Astana.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h2 class="footer-title">Explore</h2>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                        <li><a href="about.html">About us</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h2 class="footer-title">Account</h2>
+                    <ul class="footer-links">
+                        <li><a href="login.html">Log in</a></li>
+                        <li><a href="register.html">Sign up</a></li>
+                        <li><a href="profile.html">My profile</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <h2 class="footer-title">Our contacts</h2>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><span>Astana IT University, Astana</span></li>
+                        <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+77771234567">+7 777 123 4567</a></li>
+                        <li><i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="mailto:info@kaztravel.kz">info@kaztravel.kz</a></li>
+                        <li><i class="bi bi-clock-fill" aria-hidden="true"></i><span>Mon - Fri: 9:00 - 18:00</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 Kazakhstan Travel. All rights reserved.</div>
+        </div>
+    </footer>
+    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top"><i class="bi bi-chevron-up" aria-hidden="true"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

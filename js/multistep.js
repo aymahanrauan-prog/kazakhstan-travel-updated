@@ -14,7 +14,7 @@
     const steps = Array.from(form.querySelectorAll('.form-step'));
     const nextButton = document.getElementById('step-next');
     const backButton = document.getElementById('step-back');
-    const submitButton = document.getElementById('submit-btn'); // Исправлено: ID совпадает с HTML (submit-btn)
+    const submitButton = document.getElementById('submit-btn');
     const progressBar = document.getElementById('step-progress');
     const progressWrapper = document.getElementById('step-progress-wrapper');
     const progressLabel = document.getElementById('step-label');
@@ -55,6 +55,7 @@
     function fillSummary() {
         document.getElementById('summary-name').textContent = document.getElementById('reg-name').value.trim();
         document.getElementById('summary-email').textContent = document.getElementById('reg-email').value.trim();
+        document.getElementById('summary-phone').textContent = document.getElementById('reg-phone').value.trim();
     }
 
     // Checks every field of a step with the validator from validation.js
@@ -72,7 +73,6 @@
         const target = currentStep + direction;
         if (target < 1 || target > totalSteps) { return; }
         if (direction > 0 && !isStepValid(currentStep)) {
-            window.KZSound.play('click');
             return;                      // stay on this step until the data is correct
         }
         currentStep = target;
@@ -102,8 +102,17 @@
         if (invalid) {
             currentStep = steps.indexOf(invalid.closest('.form-step')) + 1;
             showStep(currentStep);
-        } else {
-            window.KZSound.play('success');
+        }
+    });
+
+    // validation.js reports errors found after sending (e.g. "email already exists")
+    form.addEventListener('kz:fielderror', function (event) {
+        const field = document.getElementById(event.detail.fieldId);
+        const step = field ? field.closest('.form-step') : null;
+        if (step) {
+            currentStep = steps.indexOf(step) + 1;
+            showStep(currentStep);
+            field.focus();
         }
     });
 

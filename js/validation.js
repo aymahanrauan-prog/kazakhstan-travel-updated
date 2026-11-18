@@ -1,7 +1,20 @@
+/**
+ * validation.js - validation for every form on the website.
+ *
+ * Rules are plain JavaScript functions (no HTML attributes such as required,
+ * pattern or type="email"). Every form has the "novalidate" attribute, and
+ * error messages are shown on the page, under the field.
+ *
+ * Forms handled here: register-form, login-form, contact-form.
+ */
 (function () {
     'use strict';
 
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    // Kazakhstan phone: +7 777 123 45 67, 8 (777) 123-45-67, +77771234567 ...
+    var PHONE_RE = /^(\+7|8)[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+
+    /* ---------- Error / success display ---------- */
 
     function showError(input, message) {
         input.classList.remove('is-valid');
@@ -15,19 +28,45 @@
         input.classList.add('is-valid');
     }
 
+    /* ---------- Rules: each returns an error message or '' ---------- */
+
+    function nameRule(el) {
+        var value = el.value.trim();
+        if (!value) { return 'Please enter your full name.'; }
+        if (value.length < 2) { return 'Name must be at least 2 characters.'; }
+        if (/\d/.test(value)) { return 'Name must not contain digits.'; }
+        return '';
+    }
+
+    function emailRule(el) {
+        var value = el.value.trim();
+        if (!value) { return 'Please enter your email address.'; }
+        if (!EMAIL_RE.test(value)) { return 'Please enter a valid email, e.g. name@example.com.'; }
+        return '';
+    }
+
+    function phoneRule(el) {
+        var value = el.value.trim();
+        if (!value) { return 'Please enter your phone number.'; }
+        if (!PHONE_RE.test(value)) { return 'Use a Kazakhstan number, e.g. +7 777 123 45 67.'; }
+        return '';
+    }
+
+    // Length + complexity (used when creating a password)
+    function newPasswordRule(el) {
+        var value = el.value;
+        if (!value) { return 'Please create a password.'; }
+        if (value.length < 8) { return 'Password must be at least 8 characters long.'; }
+        if (!/[a-z]/.test(value) || !/[A-Z]/.test(value)) { return 'Use both uppercase and lowercase letters.'; }
+        if (!/\d/.test(value)) { return 'Add at least one digit.'; }
+        return '';
+    }
+
     var rules = {
-        'reg-name': function (el) {
-            var v = el.value.trim();
-            if (!v) { return 'Please enter your full name.'; }
-            if (v.length < 2) { return 'Name must be at least 2 characters.'; }
-            return '';
-        },
+        'reg-name': nameRule,
         'reg-email': emailRule,
-        'reg-password': function (el) {
-            if (!el.value) { return 'Please create a password.'; }
-            if (el.value.length < 8) { return 'Password must be at least 8 characters long.'; }
-            return '';
-        },
+        'reg-phone': phoneRule,
+        'reg-password': newPasswordRule,
         'reg-confirm': function (el) {
             if (!el.value) { return 'Please confirm your password.'; }
             if (el.value !== document.getElementById('reg-password').value) { return 'Passwords do not match.'; }
@@ -36,27 +75,20 @@
         'reg-terms': function (el) {
             return el.checked ? '' : 'You must accept the terms to continue.';
         },
-        'username': function (el) {
-            var v = el.value.trim();
-            if (!v) { return 'Please enter your name.'; }
-            if (v.length < 2) { return 'Name must be at least 2 characters.'; }
-            return '';
+        'login-email': emailRule,
+        'login-password': function (el) {
+            return el.value ? '' : 'Please enter your password.';
         },
-        'useremail': emailRule,
-        'message': function (el) {
-            var v = el.value.trim();
-            if (!v) { return 'Please write a message.'; }
-            if (v.length < 10) { return 'Message must be at least 10 characters.'; }
+        'contact-name': nameRule,
+        'contact-email': emailRule,
+        'contact-phone': phoneRule,
+        'contact-message': function (el) {
+            var value = el.value.trim();
+            if (!value) { return 'Please write a message.'; }
+            if (value.length < 10) { return 'Message must be at least 10 characters.'; }
             return '';
         }
     };
-
-    function emailRule(el) {
-        var v = el.value.trim();
-        if (!v) { return 'Please enter your email address.'; }
-        if (!EMAIL_RE.test(v)) { return 'Please enter a valid email, e.g. name@example.com.'; }
-        return '';
-    }
 
     function validateField(el) {
         var rule = rules[el.id];
@@ -67,16 +99,38 @@
         return true;
     }
 
-    function setupForm(form, successId, toastId) {
+    /* ---------- Generic form wiring ---------- */
+
+    // Disables the submit button and shows the spinner while "sending"
+    function setBusy(button, busy) {
+        if (!button) { return; }
+        var spinner = button.querySelector('.spinner-border');
+        var text = button.querySelector('.btn-text');
+        button.disabled = busy;
+        if (spinner) { spinner.classList.toggle('d-none', !busy); }
+        if (text) {
+            if (busy) { text.dataset.original = text.textContent; text.textContent = 'Please wait...'; }
+            else if (text.dataset.original) { text.textContent = text.dataset.original; }
+        }
+    }
+
+    // handler(form) runs after all fields are valid. It returns:
+    //   {}                                   -> success
+    //   { fieldId, message }                 -> error under one field
+    //   { formError }                        -> error for the whole form
+    function setupForm(form, handler) {
         if (!form) { return; }
+
         var fields = Array.prototype.filter.call(form.elements, function (el) { return rules[el.id]; });
-        var success = document.getElementById(successId);
+        var successBox = form.querySelector('[data-success]');
+        var formError = form.querySelector('[data-form-error]');
 
         fields.forEach(function (el) {
             var eventName = el.type === 'checkbox' ? 'change' : 'blur';
             el.addEventListener(eventName, function () { validateField(el); });
             el.addEventListener('input', function () {
                 if (el.classList.contains('is-invalid')) { validateField(el); }
+                // When the password changes, re-check the confirmation
                 if (el.id === 'reg-password') {
                     var confirm = document.getElementById('reg-confirm');
                     if (confirm && confirm.value) { validateField(confirm); }
@@ -84,79 +138,92 @@
             });
         });
 
-        // Обработка отправки формы со спиннером и тостом
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-            if (success) { success.classList.add('d-none'); }
+            if (successBox) { successBox.classList.add('d-none'); }
+            if (formError) { formError.classList.add('d-none'); }
 
             var firstInvalid = null;
             fields.forEach(function (el) {
                 if (!validateField(el) && !firstInvalid) { firstInvalid = el; }
             });
-
             if (firstInvalid) { firstInvalid.focus(); return; }
 
-            // Находим кнопку отправки и элементы спиннера внутри нее
-            var $submitBtn = $(form).find('button[type="submit"], #submit-btn');
-            var $spinner = $submitBtn.find('.spinner-border');
-            var $btnText = $submitBtn.find('.btn-text');
-            var originalText = $btnText.length ? $btnText.text() : 'Sign Up';
+            var button = form.querySelector('button[type="submit"]');
+            setBusy(button, true);
 
-            // Блокируем кнопку, показываем спиннер и текст загрузки
-            $submitBtn.prop('disabled', true);
-            if ($spinner.length) { $spinner.removeClass('d-none'); }
-            if ($btnText.length) { $btnText.text('Please wait...'); } else { $submitBtn.text('Please wait...'); }
-
+            // Short delay imitates a real request to a server
             setTimeout(function () {
-                // Возвращаем кнопку в исходное состояние
-                $submitBtn.prop('disabled', false);
-                if ($spinner.length) { $spinner.addClass('d-none'); }
-                if ($btnText.length) { $btnText.text(originalText); } else { $submitBtn.text(originalText); }
+                setBusy(button, false);
+                var result = handler(form) || {};
 
-                // Очищаем форму и валидацию
-                form.reset();
-                fields.forEach(function (el) { el.classList.remove('is-valid', 'is-invalid'); });
-                if (success) { success.classList.remove('d-none'); }
-
-                // Воспроизводим звук успешной отправки
-                if (window.KZSound && typeof window.KZSound.play === 'function') {
-                    window.KZSound.play('success');
+                if (result.fieldId) {
+                    showError(document.getElementById(result.fieldId), result.message);
+                    // multistep.js listens to this event and opens the step with the error
+                    form.dispatchEvent(new CustomEvent('kz:fielderror', { detail: { fieldId: result.fieldId } }));
+                    return;
                 }
-
-                // Показываем нужный тост в правом нижнем углу
-                if (toastId) {
-                    var toastEl = document.getElementById(toastId);
-                    if (toastEl) {
-                        var toast = new bootstrap.Toast(toastEl);
-                        toast.show();
+                if (result.formError) {
+                    if (formError) {
+                        formError.textContent = result.formError;
+                        formError.classList.remove('d-none');
                     }
+                    return;
                 }
-            }, 1500);
+                if (successBox) { successBox.classList.remove('d-none'); }
+            }, 700);
         });
     }
 
     // Used by multistep.js to validate one step at a time
     window.KZValidation = { validateField: validateField };
 
-    // Инициализируем формы с передачей ID соответствующего тоста для угла
-    setupForm(document.getElementById('register-form'), 'register-success', 'register-toast');
-    setupForm(document.getElementById('contact-form'), 'contact-success', 'live-toast');
-
-    // Task 8: Copy to Clipboard functionality
-    $('#copy-email-btn').on('click', function () {
-        var textToCopy = $('#contact-email-text').text();
-        var $btn = $(this);
-
-        navigator.clipboard.writeText(textToCopy).then(function () {
-            $btn.html('✓ Copied!');
-            $btn.removeClass('btn-outline-secondary').addClass('btn-success');
-
-            setTimeout(function () {
-                $btn.html('Copy');
-                $btn.removeClass('btn-success').addClass('btn btn-sm btn-primary');
-            }, 2000);
-        }).catch(function (err) {
-            console.error('Failed to copy text: ', err);
+    /* ---------- Sign up ---------- */
+    setupForm(document.getElementById('register-form'), function () {
+        var result = window.KZAuth.register({
+            name: document.getElementById('reg-name').value,
+            email: document.getElementById('reg-email').value,
+            phone: document.getElementById('reg-phone').value,
+            password: document.getElementById('reg-password').value
         });
+
+        if (result.error) { return { fieldId: 'reg-email', message: result.error }; }
+
+        // The user is logged in automatically - open the profile page
+        setTimeout(function () { window.location.href = 'profile.html'; }, 1200);
+        return {};
+    });
+
+    /* ---------- Log in ---------- */
+    setupForm(document.getElementById('login-form'), function () {
+        var result = window.KZAuth.login(
+            document.getElementById('login-email').value,
+            document.getElementById('login-password').value
+        );
+
+        if (result.error) { return { formError: result.error }; }
+
+        setTimeout(function () { window.location.href = 'profile.html'; }, 500);
+        return {};
+    });
+
+    /* ---------- Contact form ---------- */
+    var contactForm = document.getElementById('contact-form');
+
+    setupForm(contactForm, function (form) {
+        var saved = window.KZAuth.addRequest({
+            name: document.getElementById('contact-name').value.trim(),
+            email: document.getElementById('contact-email').value.trim(),
+            phone: document.getElementById('contact-phone').value.trim(),
+            tour: document.getElementById('contact-tour').value,
+            tourLabel: document.getElementById('contact-tour').selectedOptions[0].textContent,
+            message: document.getElementById('contact-message').value.trim()
+        });
+
+        if (!saved) { return { formError: 'We could not save your request in this browser.' }; }
+
+        form.reset();
+        Array.prototype.forEach.call(form.elements, function (el) { el.classList.remove('is-valid', 'is-invalid'); });
+        return {};
     });
 })();

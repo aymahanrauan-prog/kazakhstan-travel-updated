@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Kazakhstan Travel: our mission, guides and the team behind the website">
+    <title>About us | Kazakhstan Travel</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <a class="brand" href="index.html"><i class="bi bi-compass" aria-hidden="true"></i> Kazakhstan <span>Travel</span></a>
+                <div class="header-actions">
+                    <button type="button" id="theme-toggle" class="btn-outline-brand" aria-pressed="false">Night</button>
+                    <div id="auth-area">
+                        <a href="login.html" class="auth-link">Log in</a>
+                        <a href="register.html" class="btn-brand">Sign up</a>
+                    </div>
+                    <button type="button" class="menu-toggle d-lg-none" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">&#9776;</button>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg p-0" aria-label="Main navigation">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav main-menu">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="destinations.html">Destinations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tours.html">Tours</a></li>
+                    <li class="nav-item"><a class="nav-link" href="culture.html">Culture</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html" aria-current="page">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="section-heading">About Kazakhstan Travel</h1>
+                <p class="section-intro mb-0">We help travelers discover the nature, history and hospitality of Kazakhstan.</p>
+            </header>
+
+            <section class="mb-5" aria-labelledby="mission-title">
+                <div class="panel">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <img src="images/banner.avif" class="img-fluid rounded-4 w-100" alt="Landscape of Kazakhstan" loading="lazy">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h2 id="mission-title" class="section-heading">Our mission</h2>
+                            <p class="text-secondary">Kazakhstan is a country of wide steppes, snow-capped mountains and warm people. Our goal is to make it easy to plan a trip: browse destinations, compare tours, check the weather and get in touch with a local guide.</p>
+                            <p class="text-secondary mb-3">Whether you want an active mountain trip or a quiet evening with the dombra, we help you find it.</p>
+                            <a href="tours.html" class="btn-brand">Explore tours</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-5" aria-labelledby="values-title">
+                <h2 id="values-title" class="section-heading mb-3">What we care about</h2>
+                <div class="row g-4">
+                    <div class="col-12 col-md-4"><article class="panel feature-card"><span class="feature-icon"><i class="bi bi-people" aria-hidden="true"></i></span><h3 class="h5">Local knowledge</h3><p class="text-secondary mb-0">Every tour is built together with guides who know the region.</p></article></div>
+                    <div class="col-12 col-md-4"><article class="panel feature-card"><span class="feature-icon"><i class="bi bi-shield-check" aria-hidden="true"></i></span><h3 class="h5">Clear information</h3><p class="text-secondary mb-0">Prices, durations and what is included are always shown up front.</p></article></div>
+                    <div class="col-12 col-md-4"><article class="panel feature-card"><span class="feature-icon"><i class="bi bi-heart" aria-hidden="true"></i></span><h3 class="h5">Respect for culture</h3><p class="text-secondary mb-0">We introduce visitors to traditions in a respectful, authentic way.</p></article></div>
+                </div>
+            </section>
+
+            <section class="mb-5" aria-labelledby="guides-title">
+                <h2 id="guides-title" class="section-heading">Our guides</h2>
+                <p class="section-intro mb-4">Choose a guide based on their location, languages and experience.</p>
+                <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <article class="panel text-center h-100 feature-card">
+                        <img src="images/Nurshashy_avatar.avif" alt="Nurshashu, local guide" class="guide-avatar mb-3" loading="lazy">
+                        <h3 class="h5 mb-1">Nurshashu <span class="text-warning">&#9733;</span> 9.5</h3>
+                        <p class="small text-muted mb-2">Astana &middot; Kazakh, English</p>
+                        <p class="text-secondary mb-0">Friendly local guide with a focus on culture and city tours.</p>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="panel text-center h-100 feature-card">
+                        <img src="images/arman_guide.avif" alt="Arman, local guide" class="guide-avatar mb-3" loading="lazy">
+                        <h3 class="h5 mb-1">Arman <span class="text-warning">&#9733;</span> 9.8</h3>
+                        <p class="small text-muted mb-2">Almaty &middot; Kazakh, English, Russian</p>
+                        <p class="text-secondary mb-0">Guide specializing in mountain trekking, outdoor activities and history.</p>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="panel text-center h-100 feature-card">
+                        <img src="images/dina_guide.avif" alt="Dina, local guide" class="guide-avatar mb-3" loading="lazy">
+                        <h3 class="h5 mb-1">Dina <span class="text-warning">&#9733;</span> 9.7</h3>
+                        <p class="small text-muted mb-2">Shymkent &middot; Kazakh, English, Turkish</p>
+                        <p class="text-secondary mb-0">Guide focused on photography, desert expeditions and local folklore.</p>
+                    </article>
+                </div>
+                </div>
+            </section>
+
+            <section class="mb-5" aria-labelledby="team-title">
+                <h2 id="team-title" class="section-heading">The team behind the website</h2>
+                <p class="section-intro mb-4">Students of Astana IT University who designed and built this website.</p>
+                <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm place-card">
+                        <img src="images/Abylai.avif" class="card-img-top team-image" alt="Abylay Maksutov" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5 card-title">Abylay Maksutov</h3>
+                            <p class="text-muted mb-2">Front-End Developer / Team Lead</p>
+                            <p class="card-text text-secondary">Leads the project, builds the layout and the responsive design.</p>
+                            <a href="https://github.com/Abylay612" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm mt-auto align-self-start"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm place-card">
+                        <img src="images/Rauan.avif" class="card-img-top team-image" alt="Rauan Aimakhan" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5 card-title">Rauan Aimakhan</h3>
+                            <p class="text-muted mb-2">Web Developer</p>
+                            <p class="card-text text-secondary">Builds the destinations and tours pages and their interactive features.</p>
+                            <a href="https://github.com/aymahanrauan-prog" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm mt-auto align-self-start"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm place-card">
+                        <img src="images/Nurakhmet.avif" class="card-img-top team-image" alt="Bolatbek Nurahmet" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5 card-title">Bolatbek Nurahmet</h3>
+                            <p class="text-muted mb-2">Web Developer</p>
+                            <p class="card-text text-secondary">Builds the culture and contact pages, forms and testing.</p>
+                            <a href="https://github.com/bolatbeknurakhmet" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm mt-auto align-self-start"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+                        </div>
+                    </article>
+                </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-lg-4">
+                    <a class="brand" href="index.html"><i class="bi bi-compass" aria-hidden="true"></i> Kazakhstan <span>Travel</span></a>
+                    <p class="text-muted mt-3 mb-0">Guided tours, cultural experiences and travel ideas across Kazakhstan: from the canyons of Charyn to the skyline of Astana.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h2 class="footer-title">Explore</h2>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                        <li><a href="about.html">About us</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h2 class="footer-title">Account</h2>
+                    <ul class="footer-links">
+                        <li><a href="login.html">Log in</a></li>
+                        <li><a href="register.html">Sign up</a></li>
+                        <li><a href="profile.html">My profile</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <h2 class="footer-title">Our contacts</h2>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><span>Astana IT University, Astana</span></li>
+                        <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+77771234567">+7 777 123 4567</a></li>
+                        <li><i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="mailto:info@kaztravel.kz">info@kaztravel.kz</a></li>
+                        <li><i class="bi bi-clock-fill" aria-hidden="true"></i><span>Mon - Fri: 9:00 - 18:00</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 Kazakhstan Travel. All rights reserved.</div>
+        </div>
+    </footer>
+    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top"><i class="bi bi-chevron-up" aria-hidden="true"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

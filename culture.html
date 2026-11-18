@@ -4,168 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kazakhstan Travel - destinations, tours and culture of Kazakhstan">
-    <title>Culture - Kazakhstan Travel</title>
+    <meta name="description" content="Kazakh culture: yurts, dombra, hospitality, traditional food and games">
+    <title>Culture | Kazakhstan Travel</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/theme.js"></script>
-
 </head>
 
-<body class="bg-light d-flex flex-column min-vh-100">
-    <div id="scroll-progress"
-        style="position: fixed; top: 0; left: 0; height: 4px; background: #0d6efd; width: 0%; z-index: 9999; transition: width 0.1s ease;">
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3" aria-label="Main navigation">
+<body class="d-flex flex-column min-vh-100">
+    <header class="site-header">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="index.html">Kazakhstan Travel</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto gap-lg-2">
+            <div class="header-top">
+                <a class="brand" href="index.html"><i class="bi bi-compass" aria-hidden="true"></i> Kazakhstan <span>Travel</span></a>
+                <div class="header-actions">
+                    <button type="button" id="theme-toggle" class="btn-outline-brand" aria-pressed="false">Night</button>
+                    <div id="auth-area">
+                        <a href="login.html" class="auth-link">Log in</a>
+                        <a href="register.html" class="btn-brand">Sign up</a>
+                    </div>
+                    <button type="button" class="menu-toggle d-lg-none" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">&#9776;</button>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg p-0" aria-label="Main navigation">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav main-menu">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="destinations.html">Destinations</a></li>
                     <li class="nav-item"><a class="nav-link" href="tours.html">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-semibold" href="culture.html"
-                            aria-current="page">Culture</a></li>
-                    <li class="nav-item"><a class="nav-link" href="team.html">About us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="culture.html" aria-current="page">Culture</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html">Sign Up</a></li>
-                    <li class="nav-item ms-lg-2"><button type="button" id="bg-color-btn" data-sound="click"
-                            class="btn btn-outline-light btn-sm mt-1 mt-lg-0"
-                            aria-label="Change page background color">Change background</button></li>
-                    <li class="nav-item ms-lg-1"><button type="button" id="theme-toggle"
-                            class="btn btn-outline-light btn-sm mt-1 mt-lg-0" aria-pressed="false"
-                            data-sound="click">Night mode</button></li>
-                    <li class="nav-item"><button type="button" id="sound-toggle"
-                            class="btn btn-outline-light btn-sm mt-1 mt-lg-0" aria-pressed="true">Sound: on</button>
-                    </li>
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <main class="flex-grow-1">
-        <div class="container py-4 py-lg-5">
-            <section class="text-center mb-4">
-                <h1 class="section-heading">Kazakh Cultural Traditions</h1>
-                <p class="lead text-secondary">Explore nomadic heritage, traditional music and the culture of
-                    hospitality.</p>
-            </section>
+    </header>
 
-            <section class="mb-4" aria-labelledby="culture-highlights">
-                <h2 id="culture-highlights" class="section-heading mb-3">Cultural Highlights</h2>
+    <main class="flex-grow-1">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="section-heading">Kazakh culture and traditions</h1>
+                <p class="section-intro mb-0">Explore nomadic heritage, traditional music and the culture of hospitality.</p>
+            </header>
+
+            <section class="mb-5" aria-labelledby="culture-highlights">
+                <h2 id="culture-highlights" class="section-heading mb-3">Cultural highlights</h2>
                 <div class="row g-4">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article class="card h-100 border-0 shadow-sm">
-                            <!-- Пример для первой карточки (юрта) -->
-                            <img data-src="images/yurt.avif"
-                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                                class="card-img-top card-fixed-image lazy" alt="Traditional Kazakh yurt">
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="h5 card-title">The Nomad Yurt</h3>
-                                <p class="card-text text-secondary">A portable traditional dwelling designed for a
-                                    mobile nomadic lifestyle.</p>
-                                <div class="more-info text-secondary small mb-3" id="more-info-1">A yurt has a wooden
-                                    lattice frame covered with felt. The round opening at the top, the shanyrak, lets in
-                                    light and air, and the whole home can be packed and moved with the herds.</div>
-                                <button type="button" class="btn btn-outline-primary mt-auto learn-more-btn"
-                                    data-sound="click" aria-expanded="false" aria-controls="more-info-1">Learn
-                                    More</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article class="card h-100 border-0 shadow-sm">
-                            <!-- Для домбры -->
-                            <img data-src="images/dombyra.avif"
-                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                                class="card-img-top card-fixed-image lazy" alt="Kazakh dombra">
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="h5 card-title">National Dombra</h3>
-                                <p class="card-text text-secondary">A two-stringed instrument closely associated with
-                                    Kazakh musical heritage.</p>
-                                <div class="more-info text-secondary small mb-3" id="more-info-2">The dombra is played
-                                    with a strumming technique and accompanies kuis, instrumental pieces that tell
-                                    stories. Kazakhstan celebrates National Dombra Day on the first Sunday of July.
-                                </div>
-                                <button type="button" class="btn btn-outline-primary mt-auto learn-more-btn"
-                                    data-sound="click" aria-expanded="false" aria-controls="more-info-2">Learn
-                                    More</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article class="card h-100 border-0 shadow-sm">
-                            <!-- Для гостеприимства -->
-                            <img data-src="images/kazakh-hospitality.avif"
-                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                                class="card-img-top card-fixed-image lazy" alt="Kazakh hospitality">
-                            alt="Kazakh hospitality">
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="h5 card-title">Kazakh Hospitality</h3>
-                                <p class="card-text text-secondary">A cultural tradition of welcoming guests with food,
-                                    tea and respect.</p>
-                                <div class="more-info text-secondary small mb-3" id="more-info-3">Guests are
-                                    traditionally welcomed with tea, baursaks and a shared meal at the dastarkhan, the
-                                    festive table. Refusing the invitation to sit and eat is considered impolite.</div>
-                                <button type="button" class="btn btn-outline-primary mt-auto learn-more-btn"
-                                    data-sound="click" aria-expanded="false" aria-controls="more-info-3">Learn
-                                    More</button>
-                            </div>
-                        </article>
-                    </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm place-card">
+                        <img src="images/yurt.avif" class="card-img-top card-fixed-image" alt="Traditional Kazakh yurt" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5 card-title">The Nomad Yurt</h3>
+                            <p class="card-text text-secondary">A portable traditional dwelling designed for a mobile nomadic lifestyle.</p>
+                            <div class="more-info text-secondary small mb-3" id="more-info-1">A yurt has a wooden lattice frame covered with felt. The round opening at the top, the shanyrak, lets in light and air, and the whole home can be packed and moved with the herds.</div>
+                            <button type="button" class="btn btn-outline-primary mt-auto learn-more-btn" aria-expanded="false" aria-controls="more-info-1">Learn More</button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm place-card">
+                        <img src="images/dombyra.avif" class="card-img-top card-fixed-image" alt="Kazakh dombra" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5 card-title">National Dombra</h3>
+                            <p class="card-text text-secondary">A two-stringed instrument closely associated with Kazakh musical heritage.</p>
+                            <div class="more-info text-secondary small mb-3" id="more-info-2">The dombra is played with a strumming technique and accompanies kuis, instrumental pieces that tell stories. Kazakhstan celebrates National Dombra Day on the first Sunday of July.</div>
+                            <button type="button" class="btn btn-outline-primary mt-auto learn-more-btn" aria-expanded="false" aria-controls="more-info-2">Learn More</button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="card h-100 border-0 shadow-sm place-card">
+                        <img src="images/kazakh-hospitality.avif" class="card-img-top card-fixed-image" alt="Kazakh hospitality" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5 card-title">Kazakh Hospitality</h3>
+                            <p class="card-text text-secondary">A cultural tradition of welcoming guests with food, tea and respect.</p>
+                            <div class="more-info text-secondary small mb-3" id="more-info-3">Guests are traditionally welcomed with tea, baursaks and a shared meal at the dastarkhan, the festive table. Refusing the invitation to sit and eat is considered impolite.</div>
+                            <button type="button" class="btn btn-outline-primary mt-auto learn-more-btn" aria-expanded="false" aria-controls="more-info-3">Learn More</button>
+                        </div>
+                    </article>
+                </div>
                 </div>
             </section>
 
-            /Lazy Images Section/
+            <section class="panel fact-block mb-5" aria-labelledby="fact-title">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                    <div>
+                        <h2 id="fact-title" class="h5 section-heading">Did you know?</h2>
+                        <p id="fact-text" class="mb-0 text-secondary" aria-live="polite">Press the button to discover a random fact about Kazakhstan.</p>
+                    </div>
+                    <button type="button" id="fact-btn" class="btn btn-primary flex-shrink-0">Show random fact</button>
+                </div>
+            </section>
 
-            <section class="bg-white rounded-4 shadow-sm p-2 p-md-3" aria-labelledby="culture-gallery">
-                <h2 id="culture-gallery" class="section-heading px-2 pt-2">Culture Gallery</h2>
-                <div class="row g-4 p-2">
-                    <div class="col-12 col-md-4"><img data-src="images/Kokpar.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Traditional game - Kokpar"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/kumys.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Kumys"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/katon-karagay.jpg"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Katon-karagay"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/tazy.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Tazy"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/EagleHunters.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Eagle hunters"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/beshbarmak.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='10<PASSWORD>%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Beshbarmak traditional food"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/asyk.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Traditional game - Asyk"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/kaindy.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Kaindy"></div>
-                    <div class="col-12 col-md-4"><img data-src="images/baursak.avif"
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
-                            class="img-fluid rounded-3 gallery-image lazy" alt="Baursak traditional food"></div>
+            <section class="mb-5 reveal" aria-labelledby="gallery-title">
+                <h2 id="gallery-title" class="section-heading mb-3">Traditions in pictures</h2>
+                <div class="row g-3">
+                <div class="col-6 col-md-3"><img src="images/Kokpar.avif" class="gallery-image" alt="Riders playing the traditional game kokpar" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/EagleHunters.avif" class="gallery-image" alt="Kazakh eagle hunter with a golden eagle" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/tazy.avif" class="gallery-image" alt="Tazy, the traditional Kazakh sighthound" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/asyk.avif" class="gallery-image" alt="Asyk, a traditional Kazakh game" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/kumys.avif" class="gallery-image" alt="Kumys, fermented mare's milk" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/beshbarmak.avif" class="gallery-image" alt="Beshbarmak, the national dish" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/baursak.avif" class="gallery-image" alt="Baursaks, traditional fried bread" loading="lazy"></div>
+                <div class="col-6 col-md-3"><img src="images/kazi.avif" class="gallery-image" alt="Kazy, traditional horse meat sausage" loading="lazy"></div>
                 </div>
             </section>
         </div>
     </main>
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <p class="mb-0 small">Project Team: Abylay Maksutov, Rauan Aimakhan, Bolatbek Nurahmet</p>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-lg-4">
+                    <a class="brand" href="index.html"><i class="bi bi-compass" aria-hidden="true"></i> Kazakhstan <span>Travel</span></a>
+                    <p class="text-muted mt-3 mb-0">Guided tours, cultural experiences and travel ideas across Kazakhstan: from the canyons of Charyn to the skyline of Astana.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h2 class="footer-title">Explore</h2>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                        <li><a href="about.html">About us</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h2 class="footer-title">Account</h2>
+                    <ul class="footer-links">
+                        <li><a href="login.html">Log in</a></li>
+                        <li><a href="register.html">Sign up</a></li>
+                        <li><a href="profile.html">My profile</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <h2 class="footer-title">Our contacts</h2>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><span>Astana IT University, Astana</span></li>
+                        <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+77771234567">+7 777 123 4567</a></li>
+                        <li><i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="mailto:info@kaztravel.kz">info@kaztravel.kz</a></li>
+                        <li><i class="bi bi-clock-fill" aria-hidden="true"></i><span>Mon - Fri: 9:00 - 18:00</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 Kazakhstan Travel. All rights reserved.</div>
+        </div>
     </footer>
+    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top"><i class="bi bi-chevron-up" aria-hidden="true"></i></button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-    <script src="js/jquery-lazy.js"></script>
-    <script src="js/home.js"></script>
-    <script src="js/sounds.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/favorites.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/culture.js"></script>
-    <script src="js/background.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

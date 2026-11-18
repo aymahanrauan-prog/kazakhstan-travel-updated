@@ -6,7 +6,7 @@
  *   - Filters (price, category, location) are handled with a switch statement
  *   - "Load more" appends extra cards without reloading the page
  *   - Star rating: click a star to rate a tour (saved in localStorage)
- *   - Sound effects and CSS animations are triggered by these events
+ *   - Heart button saves a tour in localStorage (favorites.js)
  */
 (function () {
     'use strict';
@@ -67,7 +67,11 @@
     const countBadge = document.getElementById('results-count');
     const emptyMessage = document.getElementById('no-results');
 
-    const MAX_PRICE = Number(priceSlider.max);
+    // The slider range is set from JavaScript (no min/max HTML attributes are used)
+    const MAX_PRICE = Number(priceSlider.dataset.max);
+    priceSlider.min = 0;
+    priceSlider.max = MAX_PRICE;
+    priceSlider.value = MAX_PRICE;
 
     const filters = { minPrice: 0, maxPrice: MAX_PRICE, categories: [], locations: [] };
     let shownCount = FIRST_PAGE;    // how many cards the user is allowed to see
@@ -111,11 +115,18 @@
             star.classList.remove('star-pop');
             void star.offsetWidth;   // restart the animation
             star.classList.add('star-pop');
-            window.KZSound.play('star');
         }
     }
 
     /* ---------- Rendering ---------- */
+
+    // Heart button: saves the tour in localStorage (see favorites.js)
+    function favoriteButton(tour) {
+        return '<button type="button" class="fav-btn" data-fav-type="tours" data-fav-id="tour-' + tour.id + '"' +
+            ' data-fav-title="' + tour.title.replace(/"/g, '&quot;') + '" data-fav-image="' + tour.image + '"' +
+            ' data-fav-href="tours.html" aria-pressed="false" aria-label="Save ' + tour.title.replace(/"/g, '&quot;') + '">' +
+            '<i class="bi bi-heart" aria-hidden="true"></i></button>';
+    }
 
     function createCard(tour, animationOrder) {
         const column = document.createElement('div');
@@ -131,7 +142,9 @@
         column.innerHTML =
             '<article class="tour-card fade-in-up" data-tour-id="' + tour.id + '">' +
                 '<div class="tour-card-content d-flex flex-column justify-content-between h-100 p-3">' +
-                    '<span class="badge align-self-start text-bg-light">' + tour.reviewLabel + '</span>' +
+                    '<div class="d-flex justify-content-between align-items-start">' +
+                        '<span class="badge text-bg-light">' + tour.reviewLabel + '</span>' + favoriteButton(tour) +
+                    '</div>' +
                     '<div class="tour-overlay p-3 rounded-3">' +
                         '<h2 class="h5 text-white">' + tour.title + '</h2>' +
                         '<p class="small text-white-50 mb-2">' + tour.subtitle + '</p>' +
@@ -141,7 +154,7 @@
                         '</div>' +
                         '<div class="d-flex justify-content-between align-items-center gap-2">' +
                             '<span class="fs-5 fw-bold">' + tour.priceLabel + '</span>' +
-                            '<a href="contact.html" class="btn btn-danger btn-sm" data-sound="click">Book now</a>' +
+                            '<a href="contact.html?tour=tour-' + tour.id + '" class="btn-brand btn-brand-sm">Book now</a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -151,6 +164,7 @@
         card.style.backgroundImage = "url('" + tour.image + "')";
         card.style.animationDelay = (animationOrder * 80) + 'ms';   // cards appear one after another
         paintStars(card, userRatings[tour.id] || 0);
+        window.KZFav.sync(column);
         return column;
     }
 
@@ -218,11 +232,9 @@
                 break;
             case 'category':
                 filters.categories = getChecked('category');
-                window.KZSound.play('click');
                 break;
             case 'location':
                 filters.locations = getChecked('location');
-                window.KZSound.play('click');
                 break;
             default:
                 return;   // not a filter control

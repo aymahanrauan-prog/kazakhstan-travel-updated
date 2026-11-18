@@ -1,104 +1,104 @@
-$(document).ready(function () {
+/**
+ * destinations.js - search + region filter on the Destinations page.
+ *
+ *   - The list updates while the visitor types or clicks a region chip
+ *   - The last search (text + region) is saved in localStorage and restored
+ *     on the next visit; "?q=..." from the home page search has priority
+ */
+(function () {
     'use strict';
 
-    const $input = $('#search-input');
-    const $suggestions = $('#search-suggestions');
-    const $cards = $('.row.g-4 article'); // Карточки достопримечательностей
+    var grid = document.getElementById('places-grid');
+    if (!grid) { return; }
 
-    // Список названий для подсказок
-    const attractions = [];
-    $cards.each(function () {
-        attractions.push($(this).find('.card-title').text());
-    });
+    var STORAGE_KEY = 'kz-places-search';
+    var input = document.getElementById('search-input');
+    var chips = document.querySelectorAll('.region-chip');
+    var cards = Array.from(grid.querySelectorAll('.place-item'));
+    var emptyMessage = document.getElementById('no-results');
+    var counter = document.getElementById('results-count');
+    var restoredNote = document.getElementById('restored-note');
+    var clearButton = document.getElementById('clear-search');
 
-    // Функция для подсветки ключевых слов с помощью регулярных выражений
-    function highlightSearchQuery(keyword) {
-        // Сначала убираем старую подсветку (возвращаем чистый текст)
-        $('.card-title, .card-text').each(function () {
-            var $el = $(this);
-            $el.html($el.text());
-        });
+    var state = { query: '', region: 'all' };
 
-        if (!keyword || keyword.trim() === '') return;
+    /* ---------- Saved search ---------- */
 
-        // Экранируем спецсимволы в поисковом запросе и создаем регулярное выражение (глобально, без учета регистра)
-        var escapedKeyword = keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-        var regex = new RegExp('(' + escapedKeyword + ')', 'gi');
-
-        // Проходим по заголовкам и тексту карточек
-        $('.card-title, .card-text').each(function () {
-            var $el = $(this);
-            var originalText = $el.text();
-
-            if (regex.test(originalText)) {
-                // Заменяем совпадение, оборачивая его в тег <mark> с желтым фоном от Bootstrap
-                var highlightedHtml = originalText.replace(regex, '<mark class="bg-warning px-1 rounded">$1</mark>');
-                $el.html(highlightedHtml);
+    function loadState() {
+        var urlQuery = new URLSearchParams(window.location.search).get('q');
+        if (urlQuery !== null) {
+            state.query = urlQuery.trim();       // comes from the home page search
+            return false;
+        }
+        try {
+            var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            if (saved && (saved.query || saved.region !== 'all')) {
+                state.query = saved.query || '';
+                state.region = saved.region || 'all';
+                return true;                     // restored from a previous visit
             }
-        });
+        } catch (error) { /* ignore */ }
+        return false;
     }
 
-    $input.on('keyup', function () {
-        const query = $(this).val().toLowerCase();
-        const rawQuery = $(this).val();
-        $suggestions.empty();
+    function saveState() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) { /* ignore */ }
+    }
 
-        if (query.length === 0) {
-            $suggestions.hide();
-            $cards.show();
-            highlightSearchQuery(''); // Убираем подсветку при очистке
-            return;
-        }
+    /* ---------- Filtering ---------- */
 
-        // Фильтрация карточек
-        $cards.each(function () {
-            const $card = $(this);
-            const text = $card.text().toLowerCase();
-            if (text.indexOf(query) !== -1) {
-                $card.show();
-            } else {
-                $card.hide();
-            }
+    function applyFilters() {
+        var query = state.query.toLowerCase();
+        var visible = 0;
+
+        cards.forEach(function (card) {
+            var matchesText = !query || card.textContent.toLowerCase().indexOf(query) !== -1;
+            var matchesRegion = state.region === 'all' || card.dataset.region === state.region;
+            var show = matchesText && matchesRegion;
+            card.hidden = !show;
+            if (show) { visible += 1; }
         });
 
-        // Генерация выпадающих подсказок (Autocomplete)
-        const matches = attractions.filter(item => item.toLowerCase().includes(query));
-        if (matches.length > 0) {
-            matches.forEach(match => {
-                $suggestions.append(`<li class="list-group-item list-group-item-action" style="cursor: pointer;">${match}</li>`);
-            });
-            $suggestions.show();
-        } else {
-            $suggestions.hide();
-        }
-
-        // Запускаем подсветку найденного текста
-        highlightSearchQuery(rawQuery);
-    });
-
-    // Клик по подсказке
-    $(document).on('click', '#search-suggestions li', function () {
-        const selectedText = $(this).text();
-        $input.val(selectedText);
-        $suggestions.hide();
-
-        // Автоматически фильтруем по выбранному
-        $cards.each(function () {
-            const $card = $(this);
-            if ($card.text().toLowerCase().includes(selectedText.toLowerCase())) {
-                $card.show();
-            } else {
-                $card.hide();
-            }
+        chips.forEach(function (chip) {
+            var active = chip.dataset.region === state.region;
+            chip.classList.toggle('active', active);
+            chip.setAttribute('aria-pressed', String(active));
         });
 
-        highlightSearchQuery(selectedText);
+        counter.textContent = visible === 1 ? '1 place found' : visible + ' places found';
+        emptyMessage.hidden = visible > 0;
+        saveState();
+    }
+
+    function resetFilters() {
+        state.query = '';
+        state.region = 'all';
+        input.value = '';
+        restoredNote.hidden = true;
+        applyFilters();
+    }
+
+    /* ---------- Events ---------- */
+
+    input.addEventListener('input', function () {
+        state.query = input.value.trim();
+        restoredNote.hidden = true;
+        applyFilters();
     });
 
-    // Скрывать подсказки при клике вне поля
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest('#search-input, #search-suggestions').length) {
-            $suggestions.hide();
-        }
+    chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+            state.region = chip.dataset.region;
+            restoredNote.hidden = true;
+            applyFilters();
+        });
     });
-});
+
+    clearButton.addEventListener('click', resetFilters);
+    document.getElementById('search-form').addEventListener('submit', function (event) { event.preventDefault(); });
+
+    var wasRestored = loadState();
+    input.value = state.query;
+    applyFilters();
+    restoredNote.hidden = !wasRestored;
+})();
