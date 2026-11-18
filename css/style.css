@@ -4,8 +4,6 @@
    3. Header / footer           4. Components
    5. Pages                     6. Animations and dark mode
    ========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
 /* ---------- 1. Design tokens ---------- */
 :root {
     --brand: #0B6E99;          /* main blue (links, headings, active items) */
@@ -107,6 +105,16 @@ a { color: var(--brand); }
 }
 
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 575.98px) {
+    .header-top { gap: 0.5rem; }
+    .brand { font-size: 1.05rem; }
+    .brand i { display: none; }
+    .header-actions, #auth-area { gap: 0.35rem; }
+    .btn-outline-brand { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+    .btn-brand { padding: 0.35rem 0.8rem; font-size: 0.85rem; white-space: nowrap; }
+    .menu-toggle { padding: 0.3rem 0.55rem; }
+}
 
 /* ---------- 3. Header ---------- */
 .site-header {
@@ -353,7 +361,7 @@ a { color: var(--brand); }
     border-radius: 1.5rem;
     overflow: hidden;
     color: #fff;
-    background: linear-gradient(rgba(9, 36, 56, 0.55), rgba(9, 36, 56, 0.65)), url('../images/banner1.avif') center / cover no-repeat;
+    background: linear-gradient(rgba(9, 36, 56, 0.55), rgba(9, 36, 56, 0.65)), url('../images/banner-wide.avif') center / cover no-repeat;
 }
 
 .hero h1 { color: #fff; font-size: 2rem; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35); }
@@ -391,7 +399,7 @@ a { color: var(--brand); }
 /* Hot offer (destinations page) */
 .hot-offer {
     min-height: 380px;
-    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../images/Charyn.jpg') center / cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../images/charyn.jpg') center / cover no-repeat;
 }
 
 .hot-offer-overlay { min-height: 380px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
@@ -510,4 +518,44 @@ body, .panel, .card, .site-header, .site-footer, .faq-item, .popup-window {
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     .js .reveal { opacity: 1; transform: none; }
+}
+
+@media (max-width: 991.98px) {
+    .header-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        grid-template-areas:
+            "theme . ."
+            "menu  brand     .";
+        align-items: center;
+        gap: 0;
+        padding: 0;
+    }
+    /* full-width tinted strip behind the first row */
+    .header-top::before {
+        content: "";
+        grid-area: 1 / 1 / 2 / -1;
+        margin: 0 calc(50% - 50vw);
+        align-self: stretch;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--line);
+    }
+    .header-actions { display: contents; }   /* its children join the grid */
+
+    #theme-toggle { grid-area: theme; justify-self: start; margin: 0.35rem 0; padding: 0.25rem 0.7rem; font-size: 0.8rem; }
+    #auth-area    { grid-area: 2 / 1; }      /* placeholder, overridden just below */
+    #auth-area    { grid-row: 1; grid-column: 2 / 4; justify-self: end; margin: 0.35rem 0; gap: 0.25rem; }
+    #auth-area .auth-link { display: inline-block; padding: 0.25rem 0.5rem; font-size: 0.9rem; white-space: nowrap; }
+    #auth-area .btn-brand { padding: 0.25rem 0.8rem; font-size: 0.85rem; white-space: nowrap; }
+
+    .menu-toggle { grid-area: menu; justify-self: start; margin: 0.6rem 0; }
+    .brand       { grid-area: brand; justify-self: center; margin: 0.6rem 0; font-size: 1.15rem; }
+
+    /* keep the controls above the tinted strip */
+    #theme-toggle, #auth-area, .menu-toggle, .brand { position: relative; }
+}
+
+@media (max-width: 359.98px) {
+    .brand { font-size: 1rem; }
+    .brand i { display: none; }
 }

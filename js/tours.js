@@ -44,16 +44,16 @@
 
     const tours = [
         { id: 1, title: 'Best of Almaty: City Tour', subtitle: 'Excursions in Almaty', category: 'Individual Excursions', location: 'Almaty', price: 109, rating: 9.8, reviews: 122, image: 'images/medeu.avif' },
-        { id: 2, title: 'Best of Almaty: Mountains', subtitle: 'Excursions in Almaty', category: 'Active Outdoor', location: 'Almaty', price: 223, rating: 9.7, reviews: 59, image: 'images/Almaty-mountains.avif' },
-        { id: 3, title: 'Charyn Canyon Excursion', subtitle: 'Excursions in Almaty', category: 'Individual Excursions', location: 'Almaty Region', price: 298, rating: 9.6, reviews: 64, image: 'images/Charyn.jpg' },
-        { id: 4, title: 'Big Almaty Lake Tour', subtitle: 'Excursions in Almaty', category: 'Active Outdoor', location: 'Almaty', price: 150, rating: 9.7, reviews: 25, image: 'images/Big_Almaty_lake.avif' },
+        { id: 2, title: 'Best of Almaty: Mountains', subtitle: 'Excursions in Almaty', category: 'Active Outdoor', location: 'Almaty', price: 223, rating: 9.7, reviews: 59, image: 'images/almaty-mountains.avif' },
+        { id: 3, title: 'Charyn Canyon Excursion', subtitle: 'Excursions in Almaty', category: 'Individual Excursions', location: 'Almaty Region', price: 298, rating: 9.6, reviews: 64, image: 'images/charyn.jpg' },
+        { id: 4, title: 'Big Almaty Lake Tour', subtitle: 'Excursions in Almaty', category: 'Active Outdoor', location: 'Almaty', price: 150, rating: 9.7, reviews: 25, image: 'images/big-almaty-lake.avif' },
         { id: 5, title: 'Kaindy & Kolsay Lakes', subtitle: 'Almaty Region', category: 'Individual Tours', location: 'Kaindy Lake', price: 210, rating: 9.6, reviews: 34, image: 'images/kolsai.avif' },
         { id: 6, title: 'Altyn-Emel National Park', subtitle: 'Almaty Region', category: 'Individual Tours', location: 'Almaty Region', price: 350, rating: 9.8, reviews: 15, image: 'images/altyn-emel.avif' },
         // Extra tours - they appear after pressing "Load more"
         { id: 7, title: 'Astana: Baiterek & Modern City', subtitle: 'Excursions in Astana', category: 'Individual Excursions', location: 'Astana', price: 95, rating: 9.5, reviews: 41, image: 'images/baiterek.avif' },
-        { id: 8, title: 'Eagle Hunters Experience', subtitle: 'Ethno activities, Almaty Region', category: 'Ethno Activities', location: 'Almaty Region', price: 260, rating: 9.9, reviews: 18, image: 'images/EagleHunters.avif' },
+        { id: 8, title: 'Eagle Hunters Experience', subtitle: 'Ethno activities, Almaty Region', category: 'Ethno Activities', location: 'Almaty Region', price: 260, rating: 9.9, reviews: 18, image: 'images/eagle-hunters.avif' },
         { id: 9, title: 'Dombra & Dastarkhan Evening', subtitle: 'Ethno activities in Astana', category: 'Ethno Activities', location: 'Astana', price: 80, rating: 9.6, reviews: 27, image: 'images/dombyra.avif' },
-        { id: 10, title: 'Kokpar & Horse Riding Day', subtitle: 'Active outdoor, Almaty Region', category: 'Active Outdoor', location: 'Almaty Region', price: 180, rating: 9.4, reviews: 12, image: 'images/Kokpar.avif' }
+        { id: 10, title: 'Kokpar & Horse Riding Day', subtitle: 'Active outdoor, Almaty Region', category: 'Active Outdoor', location: 'Almaty Region', price: 180, rating: 9.4, reviews: 12, image: 'images/kokpar.avif' }
     ].map(function (data) { return new Tour(data); });   // higher-order function: map
 
     /* ---------- State ---------- */

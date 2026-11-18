@@ -29,6 +29,15 @@ Multi-page responsive travel website about Kazakhstan (HTML, CSS, Bootstrap 5, J
 | External APIs: REST Countries, Open-Meteo | `js/api.js` |
 | Animations: hover effects, scroll reveal, back-to-top | `css/style.css`, `js/main.js` |
 
+## Project structure
+
+```
+index.html, destinations.html, tours.html, ...   pages (flat, for simple hosting)
+css/style.css                                     single stylesheet
+js/                                               one script per feature
+images/                                           lowercase kebab-case names (case-safe on Linux hosting)
+```
+
 ## Notes
 
 - No backend: users, saved items and requests live in the browser's localStorage.
